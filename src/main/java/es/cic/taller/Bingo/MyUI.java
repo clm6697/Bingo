@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
 
+import org.jsoup.nodes.BooleanAttribute;
+
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
@@ -33,7 +35,10 @@ public class MyUI extends UI {
         
         TextField sample = new TextField();
         sample.setPlaceholder("Numero Cartones");
- 
+        layout.addComponents(sample);
+        setContent(layout);
+        
+        
         String numCartonesString = sample.getValue();
         int numCartones = Integer.parseInt(numCartonesString);
         List<CrearCartones> cartones = new ArrayList<>();
@@ -44,9 +49,8 @@ public class MyUI extends UI {
         	cartones.get(i).setNombre(nombre);
         }
         
-        layout.addComponents(sample);
         
-        setContent(layout);
+       
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
