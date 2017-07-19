@@ -5,9 +5,7 @@ public class Numero {
 	
 	private int mNumero;
 	
-	public void setmNumero(int mNumero) {
-		this.mNumero = mNumero;
-	}
+	
 	public Numero(int Numero) {
 		mNumero= Numero;
 	}

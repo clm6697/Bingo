@@ -1,5 +1,8 @@
 package es.cic.taller.Bingo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.Theme;
@@ -8,6 +11,7 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
@@ -26,16 +30,21 @@ public class MyUI extends UI {
     protected void init(VaadinRequest vaadinRequest) {
         final VerticalLayout layout = new VerticalLayout();
         
-        final TextField name = new TextField();
-        name.setCaption("Type your name here:");
-
-        Button button = new Button("Click Me");
-        button.addClickListener( e -> {
-            layout.addComponent(new Label("Thanks " + name.getValue() 
-                    + ", it works!"));
-        });
         
-        layout.addComponents(name, button);
+        TextField sample = new TextField();
+        sample.setPlaceholder("Numero Cartones");
+ 
+        String numCartonesString = sample.getValue();
+        int numCartones = Integer.parseInt(numCartonesString);
+        List<CrearCartones> cartones = new ArrayList<>();
+        
+        for (int i=0; i<numCartones; i++) {
+        	cartones.add(new CrearCartones());
+        	String nombre = "Carton"+(i+1);
+        	cartones.get(i).setNombre(nombre);
+        }
+        
+        layout.addComponents(sample);
         
         setContent(layout);
     }
