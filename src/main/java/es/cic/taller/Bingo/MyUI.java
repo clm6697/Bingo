@@ -28,20 +28,35 @@ import com.vaadin.ui.VerticalLayout;
 @Theme("mytheme")
 public class MyUI extends UI {
 
+	List<CrearCartones> cartones;
+	
     @Override
     protected void init(VaadinRequest vaadinRequest) {
+    	
+    	cartones = new ArrayList<>();
+    	
         final VerticalLayout layout = new VerticalLayout();
         
         
-        TextField sample = new TextField();
-        sample.setPlaceholder("Numero Cartones");
-        layout.addComponents(sample);
+        TextField textoNumeroCartones = new TextField();
+        textoNumeroCartones.setPlaceholder("Numero Cartones");
+        
+        Button botonNumeroCartones = new Button("Seleccion");
+        botonNumeroCartones.addClickListener(event -> /*Solucionar errores*/
+        		String numCartonesString = textoNumeroCartones.getValue();
+        		int numCartones = Integer.parseInt(numCartonesString);
+        		);
+        
+        botonGenerarBola = new Button("Bingo!");
+        botonGenerarBola.addClickListener(event -> /* Codigo generar la bola */);
+        
+        
+        layout.addComponents(textoNumeroCartones);
         setContent(layout);
         
         
-        String numCartonesString = sample.getValue();
-        int numCartones = Integer.parseInt(numCartonesString);
-        List<CrearCartones> cartones = new ArrayList<>();
+       
+        
         
         for (int i=0; i<numCartones; i++) {
         	cartones.add(new CrearCartones());
@@ -49,7 +64,7 @@ public class MyUI extends UI {
         	cartones.get(i).setNombre(nombre);
         }
         
-        
+      //Añadir botones numero cartones y generar bola con listener  
        
     }
 
