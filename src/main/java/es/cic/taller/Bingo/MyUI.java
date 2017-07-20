@@ -62,6 +62,9 @@ public class MyUI extends UI {
         botonGenerarBola.addClickListener(e -> {
         	int bolaJugada = objetoBola.bolaBingo();
         	buscarNumeroCarton(bolaJugada);
+        	
+        	//Ver si es bingo con el metodo de crear cartones esbingo e interfaz grafico
+        	
         });
         
         

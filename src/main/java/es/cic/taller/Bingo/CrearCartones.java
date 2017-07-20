@@ -30,12 +30,24 @@ public class CrearCartones {
 	public void marcar(int valor) {
 		for (int i=0; i<15; i++) {
 			if (carton.get(i).getNumero()==valor) {
-				
-				
-			}else {
+				carton.get(i).setMarcado(true);
 				
 			}
 		}
+	}
+	
+	public boolean esBingo() {
+		int numeroMarcas = 0;
+		boolean bingo = false;
+		for (int i=0; i<15; i++) {
+			if (carton.get(i).isMarcado()) {
+				numeroMarcas++;
+			}
+		}
+		if (numeroMarcas == 15) {
+			bingo=true;
+		}
+		return bingo;
 	}
 	
 	public String getNombre() {

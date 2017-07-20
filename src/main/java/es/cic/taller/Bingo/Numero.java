@@ -4,7 +4,7 @@ package es.cic.taller.Bingo;
 public class Numero {
 	
 	private int mNumero;
-	
+	private boolean marcado;
 	
 	public Numero(int numero) {
 		mNumero= numero;
@@ -14,6 +14,14 @@ public class Numero {
 		return mNumero;
 	}
 	
+	public boolean isMarcado() {
+		return marcado;
+	}
+
+	public void setMarcado(boolean marcado) {
+		this.marcado = marcado;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
