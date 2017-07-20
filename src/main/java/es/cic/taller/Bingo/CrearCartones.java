@@ -9,6 +9,7 @@ public class CrearCartones {
 
 	Random rnd = new Random();
 	List<Numero> carton = new ArrayList<>();
+	
 	public CrearCartones() {
 		
 		for (int i=0; i<=14; i++) {
@@ -17,8 +18,7 @@ public class CrearCartones {
 		
 			if (i==0) {
 				carton.add(num);
-			}
-			else {
+			}else {
 				while (carton.contains(num)) {
 					return;
 				}
@@ -26,11 +26,26 @@ public class CrearCartones {
 			}	 
 		}
 	}
+	
+	public void marcar(int valor) {
+		for (int i=0; i<15; i++) {
+			if (carton.get(i).getNumero()==valor) {
+				
+				
+			}else {
+				
+			}
+		}
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	public List<Numero> getCarton() {
+		return carton;
 	}
 
 	

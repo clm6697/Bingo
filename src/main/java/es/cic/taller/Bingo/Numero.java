@@ -6,12 +6,14 @@ public class Numero {
 	private int mNumero;
 	
 	
-	public Numero(int Numero) {
-		mNumero= Numero;
+	public Numero(int numero) {
+		mNumero= numero;
 	}
+	
 	public int getNumero() {
 		return mNumero;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -19,6 +21,7 @@ public class Numero {
 		result = prime * result + mNumero;
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
