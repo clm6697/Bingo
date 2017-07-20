@@ -29,26 +29,30 @@ import com.vaadin.ui.VerticalLayout;
 public class MyUI extends UI {
 
 	List<CrearCartones> cartones;
-	
+	 int numCartones;
     @Override
     protected void init(VaadinRequest vaadinRequest) {
     	
     	cartones = new ArrayList<>();
     	
         final VerticalLayout layout = new VerticalLayout();
-        
+       
         
         TextField textoNumeroCartones = new TextField();
         textoNumeroCartones.setPlaceholder("Numero Cartones");
         
         Button botonNumeroCartones = new Button("Seleccion");
-        botonNumeroCartones.addClickListener(event -> /*Solucionar errores*/
+        botonNumeroCartones.addClickListener(e -> {
         		String numCartonesString = textoNumeroCartones.getValue();
-        		int numCartones = Integer.parseInt(numCartonesString);
+        		numCartones = Integer.parseInt(numCartonesString);
+        		
+        		}
         		);
         
-        botonGenerarBola = new Button("Bingo!");
-        botonGenerarBola.addClickListener(event -> /* Codigo generar la bola */);
+        Button botonGenerarBola = new Button("Bingo!");
+        botonGenerarBola.addClickListener(e -> {
+        	
+        });
         
         
         layout.addComponents(textoNumeroCartones);
@@ -56,17 +60,17 @@ public class MyUI extends UI {
         
         
        
-        
-        
-        for (int i=0; i<numCartones; i++) {
-        	cartones.add(new CrearCartones());
-        	String nombre = "Carton"+(i+1);
-        	cartones.get(i).setNombre(nombre);
+    }
+        private void generarCartones() {
+        	for (int i=0; i<numCartones; i++) {
+        		cartones.add(new CrearCartones());
+        		String nombre = "Carton"+(i+1);
+        		cartones.get(i).setNombre(nombre);
+        	}
         }
         
-      //Añadir botones numero cartones y generar bola con listener  
-       
-    }
+      
+    
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
