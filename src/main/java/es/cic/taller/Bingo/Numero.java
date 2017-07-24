@@ -43,5 +43,10 @@ public class Numero {
 			return false;
 		return true;
 	}
+	
+	
+	public String getNombreFichero() {
+		return mNumero + ".png";
+	}
 
 }
