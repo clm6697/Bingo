@@ -74,9 +74,8 @@ public class MyUI extends UI {
        
     }
     
-    
-    
-    private void generarCartones() {
+
+	private void generarCartones() {
         for (int i=0; i<numCartones; i++) {
         	cartones.add(new CrearCartones());
         	String nombre = "Carton"+(i+1);
@@ -101,6 +100,8 @@ public class MyUI extends UI {
     	}
     	return false;
     }
+    
+    
     
         
       

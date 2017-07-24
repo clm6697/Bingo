@@ -27,6 +27,7 @@ public class CrearCartones {
 		}
 	}
 	
+	
 	public void marcar(int valor) {
 		for (int i=0; i<15; i++) {
 			if (carton.get(i).getNumero()==valor) {
@@ -35,6 +36,7 @@ public class CrearCartones {
 			}
 		}
 	}
+	
 	
 	public boolean esBingo() {
 		int numeroMarcas = 0;
@@ -49,6 +51,13 @@ public class CrearCartones {
 		}
 		return bingo;
 	}
+	
+	
+	public int cogerPosicion (int a) {
+		int valorPosicion = carton.get(a).getNumero();
+		return valorPosicion;
+	}
+	
 	
 	public String getNombre() {
 		return nombre;
