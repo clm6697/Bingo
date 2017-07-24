@@ -5,17 +5,12 @@ import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
 
-import org.atmosphere.config.service.Get;
-import org.jsoup.nodes.BooleanAttribute;
-
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
@@ -54,6 +49,7 @@ public class MyUI extends UI {
         		String numCartonesString = textoNumeroCartones.getValue();
         		numCartones = Integer.parseInt(numCartonesString);
         		generarCartones();
+        		botonNumeroCartones.setEnabled(false);
         		
         		});
         
@@ -62,8 +58,11 @@ public class MyUI extends UI {
         botonGenerarBola.addClickListener(e -> {
         	int bolaJugada = objetoBola.bolaBingo();
         	buscarNumeroCarton(bolaJugada);
+        		if(buscarBingo()) {
+        			botonGenerarBola.setEnabled(false);
+        		}
         	
-        	//Ver si es bingo con el metodo de crear cartones esbingo e interfaz grafico
+        
         	
         });
         
@@ -93,6 +92,15 @@ public class MyUI extends UI {
     	}
     }
     
+    private boolean buscarBingo() {
+    	for(CrearCartones c: cartones) {
+    		if(c.esBingo()) {
+    			return true;
+    		}
+    		
+    	}
+    	return false;
+    }
     
         
       
