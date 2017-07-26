@@ -33,8 +33,8 @@ public class MyUI extends UI {
     protected void init(VaadinRequest vaadinRequest) {
     	
     	
-    	
-        final VerticalLayout layout1 = new VerticalLayout();
+    	final HorizontalLayout layoutGrande = new HorizontalLayout();
+        final VerticalLayout layoutVertical1 = new VerticalLayout();
         final HorizontalLayout layout2 = new HorizontalLayout();
        
         //TextField para introducir el numero de cartones deseados
@@ -52,7 +52,7 @@ public class MyUI extends UI {
         		botonNumeroCartones.setEnabled(false);
         		for (Carton c: cartones) {
         			CartonLayout cartonLayout = new CartonLayout(c);
-        			layout1.addComponent(cartonLayout);
+        			layoutVertical1.addComponent(cartonLayout);
         		}
         		});
         
@@ -60,6 +60,7 @@ public class MyUI extends UI {
         Button botonGenerarBola = new Button("Generar Numero!");
         botonGenerarBola.addClickListener(e -> {
         	int bolaJugada = generadorNumerosBingo.dameBola();
+        	
         	buscarNumeroCarton(bolaJugada);
         		if(buscarBingo()) {
         			botonGenerarBola.setEnabled(false);
@@ -68,8 +69,8 @@ public class MyUI extends UI {
         
         
         layout2.addComponents(textoNumeroCartones, botonNumeroCartones);
-        layout1.addComponents(layout2, botonGenerarBola);
-        setContent(layout1);
+        layoutVertical1.addComponents(layout2, botonGenerarBola);
+        setContent(layoutVertical1);
         
        
     }
