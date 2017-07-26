@@ -7,10 +7,15 @@ import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.server.Page;
+import com.vaadin.server.Resource;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Image;
+import com.vaadin.ui.Notification;
+import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
@@ -33,9 +38,10 @@ public class MyUI extends UI {
     protected void init(VaadinRequest vaadinRequest) {
     	
     	
-    	final HorizontalLayout layoutGrande = new HorizontalLayout();
+    	final HorizontalLayout layoutPadre = new HorizontalLayout();
         final VerticalLayout layoutVertical1 = new VerticalLayout();
-        final HorizontalLayout layout2 = new HorizontalLayout();
+        final VerticalLayout layoutVertical2 = new VerticalLayout();
+        final HorizontalLayout layoutHorizontalNumeroCartones = new HorizontalLayout();
        
         //TextField para introducir el numero de cartones deseados
         TextField textoNumeroCartones = new TextField();
@@ -60,17 +66,25 @@ public class MyUI extends UI {
         Button botonGenerarBola = new Button("Generar Numero!");
         botonGenerarBola.addClickListener(e -> {
         	int bolaJugada = generadorNumerosBingo.dameBola();
+        	Numero numAux = new Numero(bolaJugada);
+        	Image image = new Image();
+        	Resource source = CartonLayout.getImageResource(numAux.getNombreFichero());
+        	image.setSource(source);
+        	layoutVertical2.addComponentAsFirst(image);       	
         	
         	buscarNumeroCarton(bolaJugada);
         		if(buscarBingo()) {
+        			Notification.show("BINGO!!!!!!!!!!!!", Type.TRAY_NOTIFICATION);
         			botonGenerarBola.setEnabled(false);
         		}        	
         });
         
         
-        layout2.addComponents(textoNumeroCartones, botonNumeroCartones);
-        layoutVertical1.addComponents(layout2, botonGenerarBola);
-        setContent(layoutVertical1);
+        layoutHorizontalNumeroCartones.addComponents(textoNumeroCartones, botonNumeroCartones);
+        layoutVertical1.addComponents(layoutHorizontalNumeroCartones, botonGenerarBola);
+        layoutPadre.addComponents(layoutVertical1,layoutVertical2);
+        setContent(layoutPadre);
+        
         
        
     }

@@ -52,7 +52,7 @@ public class CartonLayout  extends GridLayout{
 		}
 	}
 	
-	private Resource getImageResource(String nombreRecurso) {
+	public static  Resource getImageResource(String nombreRecurso) {
 		String basePath = VaadinService.getCurrent()
 				.getBaseDirectory().getAbsolutePath();
 		FileResource resource = new FileResource(new File(basePath + "/images/" + nombreRecurso));
