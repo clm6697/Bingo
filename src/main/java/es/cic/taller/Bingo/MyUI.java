@@ -25,14 +25,14 @@ import com.vaadin.ui.VerticalLayout;
 @Theme("mytheme")
 public class MyUI extends UI {
 
-	List<CrearCartones> cartones;
-	int numCartones;
-	GenerarNumeroAleatorio objetoBola = new GenerarNumeroAleatorio(); 
+	List<Carton> cartones = new ArrayList<>();
+	
+	GeneradorNumerosBingo generadorNumerosBingo = new GeneradorNumerosBingo(); 
 	 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
     	
-    	cartones = new ArrayList<>();
+    	
     	
         final VerticalLayout layout1 = new VerticalLayout();
         final HorizontalLayout layout2 = new HorizontalLayout();
@@ -47,23 +47,23 @@ public class MyUI extends UI {
         botonNumeroCartones.addClickListener(e -> {
         	
         		String numCartonesString = textoNumeroCartones.getValue();
-        		numCartones = Integer.parseInt(numCartonesString);
-        		generarCartones();
+        		int numCartones = Integer.parseInt(numCartonesString);
+        		generarCartones(numCartones);
         		botonNumeroCartones.setEnabled(false);
-        		
+        		for (Carton c: cartones) {
+        			CartonLayout cartonLayout = new CartonLayout(c);
+        			layout1.addComponent(cartonLayout);
+        		}
         		});
         
         //Boton que genera la bola que vamos a usar en esta partida
         Button botonGenerarBola = new Button("Generar Numero!");
         botonGenerarBola.addClickListener(e -> {
-        	int bolaJugada = objetoBola.bolaBingo();
+        	int bolaJugada = generadorNumerosBingo.dameBola();
         	buscarNumeroCarton(bolaJugada);
         		if(buscarBingo()) {
         			botonGenerarBola.setEnabled(false);
-        		}
-        	
-        
-        	
+        		}        	
         });
         
         
@@ -75,24 +75,22 @@ public class MyUI extends UI {
     }
     
 
-	private void generarCartones() {
+	private void generarCartones(int numCartones) {
         for (int i=0; i<numCartones; i++) {
-        	cartones.add(new CrearCartones());
-        	String nombre = "Carton"+(i+1);
-        	cartones.get(i).setNombre(nombre);
+        	cartones.add(new Carton(i +1));
         }
     }
     
     private void buscarNumeroCarton(int bolaJugada) {
 //    	cartones.forEach(c -> c.marcar(bolaJugada));
     	
-    	for(CrearCartones c: cartones) {
+    	for(Carton c: cartones) {
     		c.marcar(bolaJugada);
     	}
     }
     
     private boolean buscarBingo() {
-    	for(CrearCartones c: cartones) {
+    	for(Carton c: cartones) {
     		if(c.esBingo()) {
     			return true;
     		}

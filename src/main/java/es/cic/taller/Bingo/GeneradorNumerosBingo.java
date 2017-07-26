@@ -5,11 +5,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class GenerarNumeroAleatorio {
+public class GeneradorNumerosBingo {
 	List<Integer> listaNumeros = new ArrayList<>();
 	Random rndm = new Random();
 	
-	public List<Integer> crearListaNumeros() {
+	public GeneradorNumerosBingo() {
+		crearListaNumeros();
+	}
+	
+	private List<Integer> crearListaNumeros() {
 		for(int i=1; i<=90; i++) {
 			listaNumeros.add(i);
 		
@@ -18,15 +22,14 @@ public class GenerarNumeroAleatorio {
 		return listaNumeros;
 	}
 	
-	public int numeroAzar() {
+	private int dameNumeroAzar() {
 		int numAzar = rndm.nextInt(this.listaNumeros.size());
 		return numAzar;
 	}
 	
-	public int bolaBingo() {
-		int bola = this.listaNumeros.get(numeroAzar());
-		listaNumeros.remove(numeroAzar());
-		return bola;
+	public int dameBola() {
+		int numAzar = dameNumeroAzar();
+		return listaNumeros.remove(numAzar);
 	}
 	
 }
