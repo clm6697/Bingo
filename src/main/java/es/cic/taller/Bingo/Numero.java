@@ -48,5 +48,9 @@ public class Numero {
 	public String getNombreFichero() {
 		return mNumero + ".png";
 	}
+	
+	public String getNombreFicheroMarcado() {
+		return "x" + mNumero + ".png";
+	}
 
 }

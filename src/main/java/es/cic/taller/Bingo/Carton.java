@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+
+
+
 public class Carton {
+	private CartonLayout cartonLayout;
 	private String nombre;
 
 	Random rnd = new Random();
@@ -22,16 +26,19 @@ public class Carton {
 					numerosCarton.add(num);
 					break;
 				}
-			}
+			}	
 		}
 	}
 	
 	
 	public void marcar(int valor) {
 		for (int i=0; i<15; i++) {
-			if (numerosCarton.get(i).getNumero()==valor) {
-				numerosCarton.get(i).setMarcado(true);
-				
+			Numero aux = numerosCarton.get(i);
+			if (aux.getNumero()==valor) {
+				aux.setMarcado(true);
+				cartonLayout.marcarViualmente(i, aux.getNombreFicheroMarcado());
+
+	        	
 			}
 		}
 	}
@@ -69,6 +76,16 @@ public class Carton {
 	}
 	public List<Numero> getCarton() {
 		return numerosCarton;
+	}
+
+
+	public CartonLayout getCartonLayout() {
+		return cartonLayout;
+	}
+
+
+	public void setCartonLayout(CartonLayout cartonLayout) {
+		this.cartonLayout = cartonLayout;
 	}
 
 	

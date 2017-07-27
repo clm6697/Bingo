@@ -1,5 +1,6 @@
 package es.cic.taller.Bingo;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,13 +8,16 @@ import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.server.FileResource;
 import com.vaadin.server.Page;
 import com.vaadin.server.Resource;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.server.VaadinService;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Image;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.TextField;
@@ -38,6 +42,9 @@ public class MyUI extends UI {
     protected void init(VaadinRequest vaadinRequest) {
     	
     	
+    	///ORDENAR NUMEROS
+    	
+    	
     	final HorizontalLayout layoutPadre = new HorizontalLayout();
         final VerticalLayout layoutVertical1 = new VerticalLayout();
         final VerticalLayout layoutVertical2 = new VerticalLayout();
@@ -45,10 +52,10 @@ public class MyUI extends UI {
        
         //TextField para introducir el numero de cartones deseados
         TextField textoNumeroCartones = new TextField();
-        textoNumeroCartones.setPlaceholder("Numero Cartones");
+        textoNumeroCartones.setPlaceholder("Número Cartones");
         
         //Boton que confirma el numero de cartones seleccionados 
-        Button botonNumeroCartones = new Button("Seleccion");
+        Button botonNumeroCartones = new Button("Continuar");
         //Generamos los cartones deseados, dentro del arrray cartones
         botonNumeroCartones.addClickListener(e -> {
         	
@@ -63,7 +70,7 @@ public class MyUI extends UI {
         		});
         
         //Boton que genera la bola que vamos a usar en esta partida
-        Button botonGenerarBola = new Button("Generar Numero!");
+        Button botonGenerarBola = new Button("Generar Número");
         botonGenerarBola.addClickListener(e -> {
         	int bolaJugada = generadorNumerosBingo.dameBola();
         	Numero numAux = new Numero(bolaJugada);
@@ -74,14 +81,33 @@ public class MyUI extends UI {
         	
         	buscarNumeroCarton(bolaJugada);
         		if(buscarBingo()) {
-        			Notification.show("BINGO!!!!!!!!!!!!", Type.TRAY_NOTIFICATION);
-        			botonGenerarBola.setEnabled(false);
+        			botonGenerarBola.setEnabled(false);        	        
+        			layoutPadre.removeAllComponents();
+        	        Image sample = new Image();
+        	        Image agradecimientos = new Image();
+        	        
+        	        String basePath = VaadinService.getCurrent()
+        					.getBaseDirectory().getAbsolutePath();
+        	        FileResource resource = new FileResource(new File(basePath + "/images/bingo.gif"));
+        	        FileResource resourceA = new FileResource(new File(basePath + "/images/agradecimientos.png"));
+        	        
+        	        sample.setSource(resource);
+        	        agradecimientos.setSource(resourceA);
+        			layoutPadre.addComponents(sample,agradecimientos);
+        			setContent(layoutPadre);
         		}        	
         });
         
         
         layoutHorizontalNumeroCartones.addComponents(textoNumeroCartones, botonNumeroCartones);
-        layoutVertical1.addComponents(layoutHorizontalNumeroCartones, botonGenerarBola);
+        
+        Image sampleBingo = new Image();
+        String basePathB = VaadinService.getCurrent()
+				.getBaseDirectory().getAbsolutePath();
+        FileResource resourceB = new FileResource(new File(basePathB + "/images/bingoF.png"));
+        sampleBingo.setSource(resourceB);
+        
+        layoutVertical1.addComponents(sampleBingo,layoutHorizontalNumeroCartones, botonGenerarBola);
         layoutPadre.addComponents(layoutVertical1,layoutVertical2);
         setContent(layoutPadre);
         

@@ -21,6 +21,7 @@ public class CartonLayout  extends GridLayout{
 	private List<Image> imagenes = new ArrayList<>();
 	
 	public CartonLayout(Carton carton) {
+		carton.setCartonLayout(this);
 		this.carton = carton;
 		this.setRows(3);
 		this.setColumns(5);
@@ -30,6 +31,12 @@ public class CartonLayout  extends GridLayout{
 		
 	}
 
+	public void marcarViualmente(int i, String nombre) {
+		Resource source = getImageResource(nombre);
+		imagenes.get(i).setSource(source);
+	}
+	
+	
 	private void inicializaObjetoImagenes() {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0 ; j < 5; j++)  {
@@ -41,8 +48,6 @@ public class CartonLayout  extends GridLayout{
 	}
 
 	private  void iniciazaNumero() {
-		int i;
-		int j;
 		for (int a = 0; a < 15; a++) {
 			Numero numero = carton.cogerNumeroPosicion(a);
 
@@ -51,6 +56,8 @@ public class CartonLayout  extends GridLayout{
 			image.setSource(resource);
 		}
 	}
+	
+
 	
 	public static  Resource getImageResource(String nombreRecurso) {
 		String basePath = VaadinService.getCurrent()
