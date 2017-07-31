@@ -61,12 +61,18 @@ public class MyUI extends UI {
         	
         		String numCartonesString = textoNumeroCartones.getValue();
         		int numCartones = Integer.parseInt(numCartonesString);
-        		generarCartones(numCartones);
-        		botonNumeroCartones.setEnabled(false);
-        		for (Carton c: cartones) {
-        			CartonLayout cartonLayout = new CartonLayout(c);
-        			layoutVertical1.addComponent(cartonLayout);
+        		
+        		if (numCartones<=0) {
+        			Notification.show("Introduce un numero de cartones mayor de cero.", Type.TRAY_NOTIFICATION);
+        		}else {
+        			generarCartones(numCartones);
+            		botonNumeroCartones.setEnabled(false);
+            		for (Carton c: cartones) {
+            			CartonLayout cartonLayout = new CartonLayout(c);
+            			layoutVertical1.addComponent(cartonLayout);
+            		}
         		}
+        		
         		});
         
         //Boton que genera la bola que vamos a usar en esta partida
